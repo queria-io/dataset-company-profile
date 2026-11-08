@@ -4,7 +4,7 @@ title: 企業カルテ
 description: |-
   法人番号を軸に、法人の基本情報・企業属性・上場情報・最新の売上高・人的資本・補助金と国の落札の集計を 1 行にまとめた表です。1 行が国税庁法人番号公表サイトにある現存法人 1 つです。
 
-  値の出典は対応する source、時点は as_of または period、原本の識別子は source_id の列で確認できます。元テーブルに時点または原本 ID がない場合は NULL です。
+  値の出典は対応する source、原本 URL は source_url、時点は as_of または period、原本の識別子は source_id の列で確認できます。元テーブルに原本 URL、時点または原本 ID がない場合は NULL です。
 sources:
   - path: https://www.houjin-bangou.nta.go.jp/
   - path: https://info.gbiz.go.jp/
@@ -67,6 +67,8 @@ fields:
     title: 業種
   - name: industry_source
     title: 業種の出典
+  - name: industry_source_url
+    title: 業種の原本 URL
   - name: industry_as_of
     title: 業種の時点
   - name: is_listed
@@ -83,10 +85,14 @@ fields:
     title: 証券コード
   - name: securities_code_source
     title: 証券コードの出典
+  - name: securities_code_source_url
+    title: 証券コードの原本 URL
   - name: securities_code_as_of
     title: 証券コードの時点
   - name: listing_source
     title: 上場情報の出典
+  - name: listing_source_url
+    title: 上場情報の原本 URL
   - name: listing_as_of
     title: 上場情報の時点
   - name: latest_net_sales
@@ -98,6 +104,8 @@ fields:
     title: 売上高の出典
   - name: latest_net_sales_source_id
     title: 売上高の原本 ID
+  - name: latest_net_sales_source_url
+    title: 売上高の原本 URL
   - name: average_annual_salary
     title: 平均年間給与
     description: 円。提出会社単体
@@ -105,6 +113,8 @@ fields:
     title: 平均年間給与の出典
   - name: average_annual_salary_source_id
     title: 平均年間給与の原本 ID
+  - name: average_annual_salary_source_url
+    title: 平均年間給与の原本 URL
   - name: average_annual_salary_as_of
     title: 平均年間給与の期末日
   - name: average_age
@@ -114,6 +124,8 @@ fields:
     title: 平均年齢の出典
   - name: average_age_source_id
     title: 平均年齢の原本 ID
+  - name: average_age_source_url
+    title: 平均年齢の原本 URL
   - name: average_age_as_of
     title: 平均年齢の期末日
   - name: female_manager_ratio
@@ -123,6 +135,8 @@ fields:
     title: 女性管理職比率の出典
   - name: female_manager_ratio_source_id
     title: 女性管理職比率の原本 ID
+  - name: female_manager_ratio_source_url
+    title: 女性管理職比率の原本 URL
   - name: female_manager_ratio_as_of
     title: 女性管理職比率の時点
   - name: subsidy_count

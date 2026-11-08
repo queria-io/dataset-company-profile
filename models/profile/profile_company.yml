@@ -30,6 +30,7 @@ models:
       - name: establishment_as_of
       - name: industry
       - name: industry_source
+      - name: industry_source_url
       - name: industry_as_of
       - name: is_listed
       - name: listing_status
@@ -38,24 +39,30 @@ models:
       - name: market_segment_as_of
       - name: securities_code
       - name: securities_code_source
+      - name: securities_code_source_url
       - name: securities_code_as_of
       - name: listing_source
+      - name: listing_source_url
       - name: listing_as_of
       - name: latest_net_sales
       - name: latest_net_sales_period
       - name: latest_net_sales_source
       - name: latest_net_sales_source_id
+      - name: latest_net_sales_source_url
       - name: average_annual_salary
       - name: average_annual_salary_source
       - name: average_annual_salary_source_id
+      - name: average_annual_salary_source_url
       - name: average_annual_salary_as_of
       - name: average_age
       - name: average_age_source
       - name: average_age_source_id
+      - name: average_age_source_url
       - name: average_age_as_of
       - name: female_manager_ratio
       - name: female_manager_ratio_source
       - name: female_manager_ratio_source_id
+      - name: female_manager_ratio_source_url
       - name: female_manager_ratio_as_of
       - name: subsidy_count
       - name: subsidy_total_amount

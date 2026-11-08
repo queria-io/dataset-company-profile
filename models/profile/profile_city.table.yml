@@ -1,0 +1,56 @@
+schema: profile
+name: city
+title: 市区町村の企業カルテ
+description: |-
+  市区町村ごとの現存法人数・上場企業数・上場企業の平均年間給与の中央値・補助金と国の落札の合計・直近 1 年の法人の新設と閉鎖をまとめた表です。1 行が 1 市区町村です。
+
+  新設と閉鎖の集計期間は period_start 以上 period_end 以下です。新設は法人番号指定年月日、閉鎖は登記記録の閉鎖年月日で数えます。
+sources:
+  - path: https://www.houjin-bangou.nta.go.jp/
+  - path: https://info.gbiz.go.jp/
+  - path: https://disclosure2.edinet-fsa.go.jp/
+  - path: https://www.p-portal.go.jp/
+fields:
+  - name: prefecture_code
+    title: 都道府県コード
+    semantic: { role: entity, name: prefecture }
+  - name: prefecture_name
+    title: 都道府県名
+  - name: city_code
+    title: 市区町村コード
+    description: 5 桁
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 検査数字付きの 6 桁
+    semantic: { role: entity, name: city }
+  - name: city_name
+    title: 市区町村名
+  - name: company_count
+    title: 現存法人数
+  - name: listed_company_count
+    title: 上場企業数
+  - name: listed_average_annual_salary_median
+    title: 上場企業の平均年間給与の中央値
+    description: 円。平均年間給与を開示した上場企業だけで計算
+  - name: subsidy_total_amount
+    title: 補助金の合計額
+    description: 円
+  - name: procurement_total_amount
+    title: 国の落札の合計額
+    description: 円
+  - name: new_company_count_last_year
+    title: 直近 1 年の新設法人数
+  - name: closed_company_count_last_year
+    title: 直近 1 年の閉鎖法人数
+  - name: period_start
+    title: 新設・閉鎖の集計開始日
+  - name: period_end
+    title: 新設・閉鎖の集計終了日
+  - name: public_funds_as_of
+    title: 公的なお金の最終日
+  - name: company_source
+    title: 法人数と上場企業の出典テーブル
+  - name: public_funds_source
+    title: 公的なお金の出典テーブル
+  - name: company_history_source
+    title: 新設・閉鎖の出典テーブル

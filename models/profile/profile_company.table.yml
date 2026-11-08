@@ -1,0 +1,145 @@
+schema: profile
+name: company
+title: 企業カルテ
+description: |-
+  法人番号を軸に、法人の基本情報・企業属性・上場情報・最新の売上高・人的資本・補助金と国の落札の集計を 1 行にまとめた表です。1 行が国税庁法人番号公表サイトにある現存法人 1 つです。
+
+  値の出典は対応する source、時点は as_of または period、原本の識別子は source_id の列で確認できます。元テーブルに時点または原本 ID がない場合は NULL です。
+sources:
+  - path: https://www.houjin-bangou.nta.go.jp/
+  - path: https://info.gbiz.go.jp/
+  - path: https://disclosure2.edinet-fsa.go.jp/
+  - path: https://www.p-portal.go.jp/
+  - path: https://positive-ryouritsu.mhlw.go.jp/positivedb/
+fields:
+  - name: corporate_number
+    title: 法人番号
+    description: 13 桁
+    semantic: { role: entity, name: corporate_number }
+  - name: name
+    title: 商号または名称
+  - name: company_kind_code
+    title: 法人種別コード
+  - name: company_kind
+    title: 法人種別
+  - name: prefecture_code
+    title: 都道府県コード
+    semantic: { role: entity, name: prefecture }
+  - name: prefecture_name
+    title: 都道府県名
+  - name: city_code
+    title: 市区町村コード
+    description: 5 桁
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 検査数字付きの 6 桁
+    semantic: { role: entity, name: city }
+  - name: city_name
+    title: 市区町村名
+  - name: assignment_date
+    title: 法人番号指定年月日
+  - name: base_source
+    title: 基本情報の出典
+  - name: base_as_of
+    title: 基本情報の更新日
+  - name: capital_stock
+    title: 資本金
+    description: 円
+  - name: capital_stock_source
+    title: 資本金の出典
+  - name: capital_stock_as_of
+    title: 資本金の時点
+  - name: employee_number
+    title: 従業員数
+  - name: employee_number_source
+    title: 従業員数の出典
+  - name: employee_number_as_of
+    title: 従業員数の時点
+  - name: establishment_date
+    title: 設立日
+  - name: establishment_year
+    title: 設立年
+  - name: establishment_source
+    title: 設立日の出典
+  - name: establishment_as_of
+    title: 設立日の時点
+  - name: industry
+    title: 業種
+  - name: industry_source
+    title: 業種の出典
+  - name: industry_as_of
+    title: 業種の時点
+  - name: is_listed
+    title: 上場の有無
+  - name: listing_status
+    title: 上場区分
+  - name: market_segment
+    title: 市場区分
+  - name: market_segment_source
+    title: 市場区分の出典
+  - name: market_segment_as_of
+    title: 市場区分の時点
+  - name: securities_code
+    title: 証券コード
+  - name: securities_code_source
+    title: 証券コードの出典
+  - name: securities_code_as_of
+    title: 証券コードの時点
+  - name: listing_source
+    title: 上場情報の出典
+  - name: listing_as_of
+    title: 上場情報の時点
+  - name: latest_net_sales
+    title: 最新期の売上高
+    description: 円
+  - name: latest_net_sales_period
+    title: 売上高の期
+  - name: latest_net_sales_source
+    title: 売上高の出典
+  - name: latest_net_sales_source_id
+    title: 売上高の原本 ID
+  - name: average_annual_salary
+    title: 平均年間給与
+    description: 円。提出会社単体
+  - name: average_annual_salary_source
+    title: 平均年間給与の出典
+  - name: average_annual_salary_source_id
+    title: 平均年間給与の原本 ID
+  - name: average_annual_salary_as_of
+    title: 平均年間給与の期末日
+  - name: average_age
+    title: 平均年齢
+    description: 歳
+  - name: average_age_source
+    title: 平均年齢の出典
+  - name: average_age_source_id
+    title: 平均年齢の原本 ID
+  - name: average_age_as_of
+    title: 平均年齢の期末日
+  - name: female_manager_ratio
+    title: 女性管理職比率
+    description: '%'
+  - name: female_manager_ratio_source
+    title: 女性管理職比率の出典
+  - name: female_manager_ratio_source_id
+    title: 女性管理職比率の原本 ID
+  - name: female_manager_ratio_as_of
+    title: 女性管理職比率の時点
+  - name: subsidy_count
+    title: 補助金の件数
+  - name: subsidy_total_amount
+    title: 補助金の合計額
+    description: 円
+  - name: subsidy_source
+    title: 補助金の出典
+  - name: subsidy_as_of
+    title: 補助金の最終交付決定日
+  - name: procurement_count
+    title: 国の落札件数
+  - name: procurement_total_amount
+    title: 国の落札合計額
+    description: 円
+  - name: procurement_source
+    title: 国の落札の出典
+  - name: procurement_as_of
+    title: 国の落札の最終決定日

@@ -1,0 +1,16 @@
+name: "company_profile"
+version: "1.0.0"
+
+profile: "company_profile"
+
+model-paths: ["models"]
+macro-paths: ["shared/macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  company_profile:
+    +database: company_profile
+    +materialized: table

@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: profile_company
+    description: 法人番号を軸に基本情報・企業属性・上場情報・最新の売上高・人的資本をまとめた表。
+    columns:
+      - name: corporate_number
+        data_tests: [unique, not_null]
+      - name: name
+        data_tests: [not_null]
+      - name: company_kind_code
+      - name: company_kind
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: city_code
+      - name: lg_code
+      - name: city_name
+      - name: assignment_date
+      - name: base_source
+      - name: base_as_of
+      - name: capital_stock
+      - name: capital_stock_source
+      - name: capital_stock_as_of
+      - name: employee_number
+      - name: employee_number_source
+      - name: employee_number_as_of
+      - name: establishment_date
+      - name: establishment_year
+      - name: establishment_source
+      - name: establishment_as_of
+      - name: industry
+      - name: industry_source
+      - name: industry_as_of
+      - name: is_listed
+      - name: listing_status
+      - name: market_segment
+      - name: market_segment_source
+      - name: market_segment_as_of
+      - name: securities_code
+      - name: securities_code_source
+      - name: securities_code_as_of
+      - name: listing_source
+      - name: listing_as_of
+      - name: latest_net_sales
+      - name: latest_net_sales_period
+      - name: latest_net_sales_source
+      - name: latest_net_sales_source_id
+      - name: average_annual_salary
+      - name: average_annual_salary_source
+      - name: average_annual_salary_source_id
+      - name: average_annual_salary_as_of
+      - name: average_age
+      - name: average_age_source
+      - name: average_age_source_id
+      - name: average_age_as_of
+      - name: female_manager_ratio
+      - name: female_manager_ratio_source
+      - name: female_manager_ratio_source_id
+      - name: female_manager_ratio_as_of
+      - name: subsidy_count
+      - name: subsidy_total_amount
+      - name: subsidy_source
+      - name: subsidy_as_of
+      - name: procurement_count
+      - name: procurement_total_amount
+      - name: procurement_source
+      - name: procurement_as_of

@@ -1,0 +1,41 @@
+schema: profile
+name: public_funds
+title: 法人が受け取った公的なお金
+description: |-
+  法人が受け取った補助金と国の落札を 1 件 1 行にそろえた表です。法人番号で company と結合できます。
+
+  補助金は gBizINFO、国の落札は調達ポータルから読みます。gBizINFO の補助金には原本 ID がないため、該当する source_record_id は NULL です。Jグランツは制度の公募情報で受給法人を持たないため、この表には含めません。
+sources:
+  - path: https://info.gbiz.go.jp/
+  - path: https://www.p-portal.go.jp/
+fields:
+  - name: fund_id
+    title: 行 ID
+    description: 出典・法人番号・内容・金額・日付のハッシュと、同じ内容の行内の連番から作った識別子
+  - name: corporate_number
+    title: 法人番号
+    description: 13 桁
+    semantic: { role: entity, name: corporate_number }
+  - name: company_name
+    title: 商号または名称
+    description: 原典に記載された名称
+  - name: fund_type
+    title: 種類
+    description: subsidy=補助金、procurement=国の落札
+  - name: title
+    title: 件名
+  - name: amount
+    title: 金額
+    description: 円
+  - name: event_date
+    title: 日付
+    description: 補助金は交付決定日、落札は落札決定日
+  - name: issuer
+    title: 交付・発注機関
+  - name: source_dataset
+    title: 出典データセット
+  - name: source_table
+    title: 出典テーブル
+  - name: source_record_id
+    title: 原本 ID
+    description: 調達ポータルは調達案件番号。gBizINFO の補助金は原本に ID 列がないため NULL

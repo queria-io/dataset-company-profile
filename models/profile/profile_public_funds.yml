@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: profile_public_funds
+    description: 法人が受け取った補助金と国の落札を 1 件 1 行にそろえた表。
+    columns:
+      - name: fund_id
+        data_tests: [unique, not_null]
+      - name: corporate_number
+        data_tests: [not_null]
+      - name: company_name
+      - name: fund_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [subsidy, procurement]
+      - name: title
+      - name: amount
+      - name: event_date
+      - name: issuer
+      - name: source_dataset
+        data_tests: [not_null]
+      - name: source_table
+        data_tests: [not_null]
+      - name: source_record_id

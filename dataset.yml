@@ -1,0 +1,54 @@
+name: company_profile
+title: 企業カルテ
+description: |-
+  法人番号を軸に、法人の基本情報・企業属性・上場情報・最新の売上高・人的資本・補助金と国の落札をまとめたデータセットです。
+
+  国税庁法人番号公表サイト、gBizINFO、EDINET、調達ポータル、女性の活躍推進企業データベースの公開データを Queria が加工しています。
+keywords:
+  - 企業
+  - 法人
+  - 法人番号
+  - 上場企業
+  - 売上高
+  - 平均年間給与
+  - 補助金
+  - 落札
+homepage: https://github.com/queria-io/dataset-company-profile
+language: ja
+
+licenses:
+  - CC-BY-4.0
+  - JP-GOV-STD-2.0
+
+sources:
+  - title: 国税庁法人番号公表サイト
+    path: https://www.houjin-bangou.nta.go.jp/
+  - title: gBizINFO
+    path: https://info.gbiz.go.jp/
+  - title: EDINET
+    path: https://disclosure2.edinet-fsa.go.jp/
+  - title: 調達ポータル
+    path: https://www.p-portal.go.jp/
+  - title: 女性の活躍推進企業データベース
+    path: https://positive-ryouritsu.mhlw.go.jp/positivedb/
+
+contributors:
+  - title: 国税庁
+    path: https://www.nta.go.jp/
+    roles: [rightsHolder]
+  - title: デジタル庁
+    path: https://www.digital.go.jp/
+    roles: [rightsHolder]
+  - title: 金融庁
+    path: https://www.fsa.go.jp/
+    roles: [rightsHolder]
+  - title: 厚生労働省
+    path: https://www.mhlw.go.jp/
+    roles: [rightsHolder]
+
+spatial_coverage: [JP]
+update_frequency: monthly
+
+schemas:
+  - name: profile
+    title: 企業カルテ

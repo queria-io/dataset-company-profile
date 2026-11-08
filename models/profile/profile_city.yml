@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: profile_city
+    description: 市区町村ごとの法人・上場企業・公的なお金・直近 1 年の新設と閉鎖をまとめた表。
+    columns:
+      - name: prefecture_code
+        data_tests: [not_null]
+      - name: prefecture_name
+      - name: city_code
+        data_tests: [unique, not_null]
+      - name: lg_code
+      - name: city_name
+      - name: company_count
+      - name: listed_company_count
+      - name: listed_average_annual_salary_median
+      - name: subsidy_total_amount
+      - name: procurement_total_amount
+      - name: new_company_count_last_year
+      - name: closed_company_count_last_year
+      - name: period_start
+      - name: period_end
+      - name: public_funds_as_of
+      - name: company_source
+      - name: public_funds_source
+      - name: company_history_source

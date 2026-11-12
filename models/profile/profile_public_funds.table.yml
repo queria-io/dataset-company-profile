@@ -15,7 +15,7 @@ fields:
   - name: corporate_number
     title: 法人番号
     description: 13 桁
-    semantic: { role: entity, name: corporate_number }
+    annotations: { queria: { semantic: { role: entity, name: corporate_number } } }
   - name: company_name
     title: 商号または名称
     description: 原典に記載された名称

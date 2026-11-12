@@ -4,6 +4,8 @@ models:
   - name: profile_company
     description: 法人番号を軸に基本情報・企業属性・上場情報・最新の売上高・人的資本をまとめた表。
     columns:
+      - name: shard
+        data_tests: [not_null]
       - name: corporate_number
         data_tests: [unique, not_null]
       - name: name

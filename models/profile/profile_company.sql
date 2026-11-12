@@ -44,7 +44,9 @@ subsidy as (
     select
         corporate_number,
         count(*) as subsidy_count,
-        sum(amount) as subsidy_total_amount,
+        case
+            when count(amount) = count(*) then sum(amount)
+        end as subsidy_total_amount,
         max(certification_date) as subsidy_as_of
     from gbizinfo.main.mart_gbizinfo_subsidy
     where corporate_number is not null
@@ -109,6 +111,11 @@ select
         when m.industry is not null then 'mhlw.josei_katsuyaku.company'
         when g.business_items is not null then 'gbizinfo.main.mart_gbizinfo_company'
     end as industry_source,
+    if(
+        e.industry is not null,
+        'https://disclosure2dl.edinet-fsa.go.jp/searchdocument/codelist/Edinetcode.zip',
+        null
+    ) as industry_source_url,
     if(e.industry is null and m.industry is not null, m.last_updated, null) as industry_as_of,
 
     case
@@ -116,32 +123,78 @@ select
         else m.market_segment is not null
     end as is_listed,
     coalesce(e.listing_status, if(m.market_segment is not null, '上場', null)) as listing_status,
-    m.market_segment,
-    if(m.market_segment is not null, 'mhlw.josei_katsuyaku.company', null) as market_segment_source,
-    if(m.market_segment is not null, m.last_updated, null) as market_segment_as_of,
-    coalesce(e.sec_code, m.securities_code) as securities_code,
     case
+        when e.listing_status = '非上場' then null
+        else m.market_segment
+    end as market_segment,
+    if(
+        e.listing_status is distinct from '非上場' and m.market_segment is not null,
+        'mhlw.josei_katsuyaku.company',
+        null
+    ) as market_segment_source,
+    if(
+        e.listing_status is distinct from '非上場' and m.market_segment is not null,
+        m.last_updated,
+        null
+    ) as market_segment_as_of,
+    case
+        when e.listing_status = '非上場' then null
+        when e.sec_code is not null then e.sec_code
+        else m.securities_code
+    end as securities_code,
+    case
+        when e.listing_status = '非上場' then null
         when e.sec_code is not null then 'edinet.main.mart_companies'
-        when m.securities_code is not null then 'mhlw.josei_katsuyaku.company'
+        when e.listing_status is distinct from '非上場' and m.securities_code is not null
+            then 'mhlw.josei_katsuyaku.company'
     end as securities_code_source,
-    if(e.sec_code is null and m.securities_code is not null, m.last_updated, null) as securities_code_as_of,
+    if(
+        e.listing_status is distinct from '非上場' and e.sec_code is not null,
+        'https://disclosure2dl.edinet-fsa.go.jp/searchdocument/codelist/Edinetcode.zip',
+        null
+    ) as securities_code_source_url,
+    if(
+        e.sec_code is null
+            and e.listing_status is distinct from '非上場'
+            and m.securities_code is not null,
+        m.last_updated,
+        null
+    ) as securities_code_as_of,
     case
         when e.listing_status is not null then 'edinet.main.mart_companies'
         when m.market_segment is not null then 'mhlw.josei_katsuyaku.company'
     end as listing_source,
+    if(
+        e.listing_status is not null,
+        'https://disclosure2dl.edinet-fsa.go.jp/searchdocument/codelist/Edinetcode.zip',
+        null
+    ) as listing_source_url,
     if(e.listing_status is null and m.market_segment is not null, m.last_updated, null) as listing_as_of,
 
     coalesce(b.net_sales, cast(g.latest_net_sales as decimal(38, 4))) as latest_net_sales,
-    coalesce(cast(b.period_end as varchar), g.latest_fiscal_year) as latest_net_sales_period,
+    case
+        when b.net_sales is not null then cast(b.period_end as varchar)
+        when g.latest_net_sales is not null then g.latest_fiscal_year
+    end as latest_net_sales_period,
     case
         when b.net_sales is not null then 'edinet.main.mart_business_results'
         when g.latest_net_sales is not null then 'gbizinfo.main.mart_gbizinfo_company'
     end as latest_net_sales_source,
     if(b.net_sales is not null, b.doc_id, null) as latest_net_sales_source_id,
+    if(
+        b.net_sales is not null,
+        'https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?' || b.doc_id,
+        null
+    ) as latest_net_sales_source_url,
 
     hc.average_annual_salary,
     if(hc.average_annual_salary is not null, 'edinet.main.mart_human_capital', null) as average_annual_salary_source,
     if(hc.average_annual_salary is not null, hc.doc_id, null) as average_annual_salary_source_id,
+    if(
+        hc.average_annual_salary is not null,
+        'https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?' || hc.doc_id,
+        null
+    ) as average_annual_salary_source_url,
     if(hc.average_annual_salary is not null, hc.period_end, null) as average_annual_salary_as_of,
     coalesce(hc.average_age, g.avg_age) as average_age,
     case
@@ -149,6 +202,11 @@ select
         when g.avg_age is not null then 'gbizinfo.main.mart_gbizinfo_company'
     end as average_age_source,
     if(hc.average_age is not null, hc.doc_id, null) as average_age_source_id,
+    if(
+        hc.average_age is not null,
+        'https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?' || hc.doc_id,
+        null
+    ) as average_age_source_url,
     if(hc.average_age is not null, hc.period_end, null) as average_age_as_of,
     coalesce(
         100.0 * hc.female_manager_ratio,
@@ -161,13 +219,21 @@ select
         when w.female_manager_ratio is not null then 'gbizinfo.main.mart_gbizinfo_workplace'
     end as female_manager_ratio_source,
     if(hc.female_manager_ratio is not null, hc.doc_id, null) as female_manager_ratio_source_id,
+    if(
+        hc.female_manager_ratio is not null,
+        'https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?' || hc.doc_id,
+        null
+    ) as female_manager_ratio_source_url,
     case
         when hc.female_manager_ratio is not null then hc.period_end
         when m.women_in_management_pct is not null then m.last_updated
     end as female_manager_ratio_as_of,
 
     coalesce(s.subsidy_count, 0) as subsidy_count,
-    coalesce(s.subsidy_total_amount, 0) as subsidy_total_amount,
+    case
+        when s.subsidy_count is null then 0
+        else s.subsidy_total_amount
+    end as subsidy_total_amount,
     'gbizinfo.main.mart_gbizinfo_subsidy' as subsidy_source,
     s.subsidy_as_of,
     coalesce(p.procurement_count, 0) as procurement_count,

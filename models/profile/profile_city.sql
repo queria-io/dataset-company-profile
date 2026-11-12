@@ -25,6 +25,8 @@ company_summary as (
 funds_summary as (
     select
         c.city_code,
+        count(*) filter (where f.fund_type = 'subsidy') as subsidy_count,
+        count(f.amount) filter (where f.fund_type = 'subsidy') as subsidy_amount_count,
         sum(f.amount) filter (where f.fund_type = 'subsidy') as subsidy_total_amount,
         sum(f.amount) filter (where f.fund_type = 'procurement') as procurement_total_amount,
         max(f.event_date) as public_funds_as_of
@@ -58,7 +60,10 @@ select
     c.company_count,
     c.listed_company_count,
     c.listed_average_annual_salary_median,
-    coalesce(f.subsidy_total_amount, 0) as subsidy_total_amount,
+    case
+        when f.city_code is null or f.subsidy_count = 0 then 0
+        when f.subsidy_count = f.subsidy_amount_count then f.subsidy_total_amount
+    end as subsidy_total_amount,
     coalesce(f.procurement_total_amount, 0) as procurement_total_amount,
     coalesce(h.new_company_count_last_year, 0) as new_company_count_last_year,
     coalesce(h.closed_company_count_last_year, 0) as closed_company_count_last_year,

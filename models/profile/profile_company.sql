@@ -63,6 +63,8 @@ procurement as (
 )
 
 select
+    -- 法人番号から 1 件を引くときに読むファイル (法人番号の下 3 桁ごとに分けて書く。dbt_project.yml)
+    right(h.corporate_number, 3) as shard,
     h.corporate_number,
     h.name,
     h.kind as company_kind_code,

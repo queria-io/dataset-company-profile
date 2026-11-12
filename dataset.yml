@@ -52,3 +52,19 @@ update_frequency: monthly
 schemas:
   - name: profile
     title: 企業カルテ
+
+annotations:
+  queria:
+    themes: [economy]
+    cover: 🏢
+    ai_context:
+      instructions: |
+        法人の様子をまとめて知りたいとき、市区町村ごとの企業の数や公的なお金を比べるときに最初に引く表。
+        profile.company は 1 行が現存する法人 1 つで、corporate_number (法人番号 13 桁) で houjin_bangou・gbizinfo・edinet と結合できる。
+        値ごとに *_source (出典のテーブル) と *_as_of (時点) の列がある。profile.public_funds は補助金と国の落札の 1 件 1 行。
+        profile.city は本店の市区町村ごとの集計で、city_code (5 桁) と lg_code (6 桁) で地域のデータセットと結合できる。
+      synonyms: [企業カルテ, 法人カルテ, 企業プロファイル, 法人の概要]
+      examples:
+        - 法人番号から会社の資本金・従業員数・上場の有無を知りたい
+        - ある会社が受け取った補助金と国の落札を見たい
+        - 市区町村ごとの上場企業の数を比べたい

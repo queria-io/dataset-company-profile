@@ -214,14 +214,14 @@ source = { virtual = "." }
 dependencies = [
     { name = "dbt-core" },
     { name = "dbt-duckdb" },
-    { name = "queria" },
+    { name = "fdl-cli" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "dbt-core", specifier = ">=1.11.2" },
     { name = "dbt-duckdb", specifier = ">=1.10.0" },
-    { name = "queria", specifier = ">=0.25.3" },
+    { name = "fdl-cli", specifier = ">=0.19.0" },
 ]
 
 [[package]]
@@ -990,21 +990,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/da/92/1446574745d74df0c92e6aa4a7b0b3130706a4142b2d1a5869f2eaa423c6/pyyaml-6.0.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:16249ee61e95f858e83976573de0f5b2893b3677ba71c9dd36b9cf8be9ac6d65", size = 829923, upload-time = "2025-09-25T21:32:54.537Z" },
     { url = "https://files.pythonhosted.org/packages/f0/7a/1c7270340330e575b92f397352af856a8c06f230aa3e76f86b39d01b416a/pyyaml-6.0.3-cp314-cp314t-win_amd64.whl", hash = "sha256:4ad1906908f2f5ae4e5a8ddfce73c320c2a1429ec52eafd27138b7f1cbe341c9", size = 174062, upload-time = "2025-09-25T21:32:55.767Z" },
     { url = "https://files.pythonhosted.org/packages/f1/12/de94a39c2ef588c7e6455cfbe7343d3b2dc9d6b6b2f40c4c6565744c873d/pyyaml-6.0.3-cp314-cp314t-win_arm64.whl", hash = "sha256:ebc55a14a21cb14062aa4162f906cd962b28e2e9ea38f9b4391244cd8de4ae0b", size = 149341, upload-time = "2025-09-25T21:32:56.828Z" },
-]
-
-[[package]]
-name = "queria"
-version = "0.51.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "duckdb" },
-    { name = "fdl-cli" },
-    { name = "jsonschema" },
-    { name = "pyyaml" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/19/04/9fa6feb937cb1f73b76bfd03337ac610a3182fcd0db0deef1d45d71d43bd/queria-0.51.0.tar.gz", hash = "sha256:a77fcc80726206cfc1e3307e943688dbbb38f5e12a68c29661239a8ab2397c08", size = 407314, upload-time = "2026-11-08T00:58:02.409Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/79/5e/fb9e2add5f070e81fdc3bb58fc69cbac3da6d5d42a32eb47f91cf23f27d5/queria-0.51.0-py3-none-any.whl", hash = "sha256:feeadeca9ff7950cbe21355c82f04e6a811ce8fb495f3e42d5b58c5dde506d96", size = 172925, upload-time = "2026-11-08T00:58:00.647Z" },
 ]
 
 [[package]]

@@ -12,6 +12,9 @@ sources:
   - path: https://www.p-portal.go.jp/
   - path: https://positive-ryouritsu.mhlw.go.jp/positivedb/
 fields:
+  - name: shard
+    title: 法人番号の下 3 桁
+    description: ファイルを分ける単位。法人番号から 1 件を引くときに、読むファイルを決める
   - name: corporate_number
     title: 法人番号
     description: 13 桁

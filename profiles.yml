@@ -48,7 +48,7 @@ company_profile:
           alias: p_portal
           is_ducklake: true
           read_only: true
-        - path: "ducklake:https://data.queria.io/datasets/queria/mhlw/ducklake.duckdb"
-          alias: mhlw
+        - path: "ducklake:https://data.queria.io/datasets/queria/positive_ryouritsu/ducklake.duckdb"
+          alias: positive_ryouritsu
           is_ducklake: true
           read_only: true

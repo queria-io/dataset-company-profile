@@ -10,9 +10,9 @@ with edinet_company as (
     ) = 1
 ),
 
-mhlw_company as (
+josei_company as (
     select *
-    from mhlw.josei_katsuyaku.company
+    from positive_ryouritsu.josei_katsuyaku.company
     where corporate_number is not null
     qualify row_number() over (
         partition by corporate_number
@@ -108,7 +108,7 @@ select
     coalesce(e.industry, m.industry, g.business_items) as industry,
     case
         when e.industry is not null then 'edinet.main.mart_companies'
-        when m.industry is not null then 'mhlw.josei_katsuyaku.company'
+        when m.industry is not null then 'positive_ryouritsu.josei_katsuyaku.company'
         when g.business_items is not null then 'gbizinfo.main.mart_gbizinfo_company'
     end as industry_source,
     if(
@@ -129,7 +129,7 @@ select
     end as market_segment,
     if(
         e.listing_status is distinct from '非上場' and m.market_segment is not null,
-        'mhlw.josei_katsuyaku.company',
+        'positive_ryouritsu.josei_katsuyaku.company',
         null
     ) as market_segment_source,
     if(
@@ -146,7 +146,7 @@ select
         when e.listing_status = '非上場' then null
         when e.sec_code is not null then 'edinet.main.mart_companies'
         when e.listing_status is distinct from '非上場' and m.securities_code is not null
-            then 'mhlw.josei_katsuyaku.company'
+            then 'positive_ryouritsu.josei_katsuyaku.company'
     end as securities_code_source,
     if(
         e.listing_status is distinct from '非上場' and e.sec_code is not null,
@@ -162,7 +162,7 @@ select
     ) as securities_code_as_of,
     case
         when e.listing_status is not null then 'edinet.main.mart_companies'
-        when m.market_segment is not null then 'mhlw.josei_katsuyaku.company'
+        when m.market_segment is not null then 'positive_ryouritsu.josei_katsuyaku.company'
     end as listing_source,
     if(
         e.listing_status is not null,
@@ -215,7 +215,7 @@ select
     ) as female_manager_ratio,
     case
         when hc.female_manager_ratio is not null then 'edinet.main.mart_human_capital'
-        when m.women_in_management_pct is not null then 'mhlw.josei_katsuyaku.company'
+        when m.women_in_management_pct is not null then 'positive_ryouritsu.josei_katsuyaku.company'
         when w.female_manager_ratio is not null then 'gbizinfo.main.mart_gbizinfo_workplace'
     end as female_manager_ratio_source,
     if(hc.female_manager_ratio is not null, hc.doc_id, null) as female_manager_ratio_source_id,
@@ -244,7 +244,7 @@ from houjin_bangou.main.mart_houjin_bangou h
 left join gbizinfo.main.mart_gbizinfo_company g using (corporate_number)
 left join gbizinfo.main.mart_gbizinfo_workplace w using (corporate_number)
 left join edinet_company e using (corporate_number)
-left join mhlw_company m using (corporate_number)
+left join josei_company m using (corporate_number)
 left join business_results b using (corporate_number)
 left join human_capital hc using (corporate_number)
 left join subsidy s using (corporate_number)

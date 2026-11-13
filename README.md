@@ -12,7 +12,7 @@ Queria の公開データセットを読んで作ります。
 | gBizINFO | `gbizinfo.main.mart_gbizinfo_company`、`gbizinfo.main.mart_gbizinfo_workplace`、`gbizinfo.main.mart_gbizinfo_subsidy` |
 | EDINET | `edinet.main.mart_companies`、`edinet.main.mart_business_results`、`edinet.main.mart_human_capital` |
 | 調達ポータル | `p_portal.main.procurement_award` |
-| 女性の活躍推進企業データベース | `mhlw.josei_katsuyaku.company` |
+| 女性の活躍推進企業データベース | `positive_ryouritsu.josei_katsuyaku.company` |
 
 元データの利用規約に従います。
 

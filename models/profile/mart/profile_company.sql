@@ -2,7 +2,7 @@
 
 with edinet_company as (
     select *
-    from edinet.main.mart_companies
+    from {{ ref('stg_edinet_companies') }}
     where corporate_number is not null
     qualify row_number() over (
         partition by corporate_number
@@ -12,7 +12,7 @@ with edinet_company as (
 
 josei_company as (
     select *
-    from positive_ryouritsu.josei_katsuyaku.company
+    from {{ ref('stg_positive_ryouritsu_company') }}
     where corporate_number is not null
     qualify row_number() over (
         partition by corporate_number
@@ -22,7 +22,7 @@ josei_company as (
 
 business_results as (
     select *
-    from edinet.main.mart_business_results
+    from {{ ref('stg_edinet_business_results') }}
     where corporate_number is not null and year_offset = 0
     qualify row_number() over (
         partition by corporate_number
@@ -32,7 +32,7 @@ business_results as (
 
 human_capital as (
     select *
-    from edinet.main.mart_human_capital
+    from {{ ref('stg_edinet_human_capital') }}
     where corporate_number is not null
     qualify row_number() over (
         partition by corporate_number
@@ -48,7 +48,7 @@ subsidy as (
             when count(amount) = count(*) then sum(amount)
         end as subsidy_total_amount,
         max(certification_date) as subsidy_as_of
-    from gbizinfo.main.mart_gbizinfo_subsidy
+    from {{ ref('stg_gbizinfo_subsidy') }}
     where corporate_number is not null
     group by corporate_number
 ),
@@ -59,7 +59,7 @@ procurement as (
         count(*) as procurement_count,
         sum(award_price) as procurement_total_amount,
         max(award_date) as procurement_as_of
-    from p_portal.main.procurement_award
+    from {{ ref('stg_p_portal_procurement_award') }}
     where corporate_number is not null
     group by corporate_number
 )
@@ -240,9 +240,9 @@ select
     coalesce(p.procurement_total_amount, 0) as procurement_total_amount,
     'p_portal.main.procurement_award' as procurement_source,
     p.procurement_as_of
-from houjin_bangou.main.mart_houjin_bangou h
-left join gbizinfo.main.mart_gbizinfo_company g using (corporate_number)
-left join gbizinfo.main.mart_gbizinfo_workplace w using (corporate_number)
+from {{ ref('stg_houjin_bangou') }} h
+left join {{ ref('stg_gbizinfo_company') }} g using (corporate_number)
+left join {{ ref('stg_gbizinfo_workplace') }} w using (corporate_number)
 left join edinet_company e using (corporate_number)
 left join josei_company m using (corporate_number)
 left join business_results b using (corporate_number)

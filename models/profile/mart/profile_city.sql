@@ -46,7 +46,7 @@ history_summary as (
             where process = '21'
               and close_date between current_date - interval '1 year' and current_date
         ) as closed_company_count_last_year
-    from houjin_bangou.main.mart_houjin_bangou_history
+    from {{ ref('stg_houjin_bangou_history') }}
     where prefecture_code is not null and city_code is not null
     group by prefecture_code, city_code
 )

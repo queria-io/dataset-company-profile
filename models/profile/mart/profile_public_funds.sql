@@ -12,7 +12,7 @@ with funds as (
         'gbizinfo' as source_dataset,
         'main.mart_gbizinfo_subsidy' as source_table,
         cast(null as varchar) as source_record_id
-    from gbizinfo.main.mart_gbizinfo_subsidy
+    from {{ ref('stg_gbizinfo_subsidy') }}
     where corporate_number is not null
 
     union all
@@ -28,7 +28,7 @@ with funds as (
         'p_portal' as source_dataset,
         'main.procurement_award' as source_table,
         procurement_item_no as source_record_id
-    from p_portal.main.procurement_award
+    from {{ ref('stg_p_portal_procurement_award') }}
     where corporate_number is not null
 ),
 

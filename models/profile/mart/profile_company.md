@@ -1,5 +1,6 @@
-schema: profile
-name: company
+---
+$schema: https://queria.io/schemas/table/v1.json
+table: profile.company
 title: 企業カルテ
 description: |-
   法人番号を軸に、法人の基本情報・企業属性・上場情報・最新の売上高・人的資本・補助金と国の落札の集計を 1 行にまとめた表です。1 行が国税庁法人番号公表サイトにある現存法人 1 つです。
@@ -18,7 +19,7 @@ fields:
   - name: corporate_number
     title: 法人番号
     description: 13 桁
-    annotations: { queria: { semantic: { role: entity, name: corporate_number } } }
+    semantic: {role: entity, name: corporate_number}
   - name: name
     title: 商号または名称
   - name: company_kind_code
@@ -27,7 +28,7 @@ fields:
     title: 法人種別
   - name: prefecture_code
     title: 都道府県コード
-    annotations: { queria: { semantic: { role: entity, name: prefecture } } }
+    semantic: {role: entity, name: prefecture}
   - name: prefecture_name
     title: 都道府県名
   - name: city_code
@@ -36,7 +37,7 @@ fields:
   - name: lg_code
     title: 全国地方公共団体コード
     description: 検査数字付きの 6 桁
-    annotations: { queria: { semantic: { role: entity, name: city } } }
+    semantic: {role: entity, name: city}
   - name: city_name
     title: 市区町村名
   - name: assignment_date
@@ -160,3 +161,4 @@ fields:
     title: 国の落札の出典
   - name: procurement_as_of
     title: 国の落札の最終決定日
+---

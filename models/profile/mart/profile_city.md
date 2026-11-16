@@ -1,5 +1,6 @@
-schema: profile
-name: city
+---
+$schema: https://queria.io/schemas/table/v1.json
+table: profile.city
 title: 市区町村の企業カルテ
 description: |-
   市区町村ごとの現存法人数・上場企業数・上場企業の平均年間給与の中央値・補助金と国の落札の合計・直近 1 年の法人の新設と閉鎖をまとめた表です。1 行が 1 市区町村です。
@@ -13,7 +14,7 @@ sources:
 fields:
   - name: prefecture_code
     title: 都道府県コード
-    annotations: { queria: { semantic: { role: entity, name: prefecture } } }
+    semantic: {role: entity, name: prefecture}
   - name: prefecture_name
     title: 都道府県名
   - name: city_code
@@ -22,7 +23,7 @@ fields:
   - name: lg_code
     title: 全国地方公共団体コード
     description: 検査数字付きの 6 桁
-    annotations: { queria: { semantic: { role: entity, name: city } } }
+    semantic: {role: entity, name: city}
   - name: city_name
     title: 市区町村名
   - name: company_count
@@ -54,3 +55,4 @@ fields:
     title: 公的なお金の出典テーブル
   - name: company_history_source
     title: 新設・閉鎖の出典テーブル
+---

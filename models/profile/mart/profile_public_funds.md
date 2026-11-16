@@ -1,5 +1,6 @@
-schema: profile
-name: public_funds
+---
+$schema: https://queria.io/schemas/table/v1.json
+table: profile.public_funds
 title: 法人が受け取った公的なお金
 description: |-
   法人が受け取った補助金と国の落札を 1 件 1 行にそろえた表です。法人番号で company と結合できます。
@@ -15,7 +16,7 @@ fields:
   - name: corporate_number
     title: 法人番号
     description: 13 桁
-    annotations: { queria: { semantic: { role: entity, name: corporate_number } } }
+    semantic: {role: entity, name: corporate_number}
   - name: company_name
     title: 商号または名称
     description: 原典に記載された名称
@@ -39,3 +40,4 @@ fields:
   - name: source_record_id
     title: 原本 ID
     description: 調達ポータルは調達案件番号。gBizINFO の補助金は原本に ID 列がないため NULL
+---

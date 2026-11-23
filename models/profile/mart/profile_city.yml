@@ -2,7 +2,6 @@ version: 2
 
 models:
   - name: profile_city
-    description: 市区町村ごとの法人・上場企業・公的なお金・直近 1 年の新設と閉鎖をまとめた表。
     columns:
       - name: prefecture_code
         data_tests: [not_null]

@@ -1,25 +1,18 @@
----
-$schema: https://queria.io/schemas/table/v1.json
-table: profile.company
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
 title: 企業カルテ
 description: |-
   法人番号を軸に、法人の基本情報・企業属性・上場情報・最新の売上高・人的資本・補助金と国の落札の集計を 1 行にまとめた表です。1 行が国税庁法人番号公表サイトにある現存法人 1 つです。
 
   値の出典は対応する source、原本 URL は source_url、時点は as_of または period、原本の識別子は source_id の列で確認できます。元テーブルに原本 URL、時点または原本 ID がない場合は NULL です。
-sources:
-  - path: https://www.houjin-bangou.nta.go.jp/
-  - path: https://info.gbiz.go.jp/
-  - path: https://disclosure2.edinet-fsa.go.jp/
-  - path: https://www.p-portal.go.jp/
-  - path: https://positive-ryouritsu.mhlw.go.jp/positivedb/
-fields:
+sources: [houjin-bangou, info, disclosure2, p-portal, positivedb]
+columns:
   - name: shard
     title: 法人番号の下 3 桁
     description: ファイルを分ける単位。法人番号から 1 件を引くときに、読むファイルを決める
   - name: corporate_number
     title: 法人番号
     description: 13 桁
-    semantic: {role: entity, name: corporate_number}
+    entity: {type: foreign, name: corporate_number}
   - name: name
     title: 商号または名称
   - name: company_kind_code
@@ -28,7 +21,7 @@ fields:
     title: 法人種別
   - name: prefecture_code
     title: 都道府県コード
-    semantic: {role: entity, name: prefecture}
+    entity: {type: foreign, name: prefecture}
   - name: prefecture_name
     title: 都道府県名
   - name: city_code
@@ -37,7 +30,7 @@ fields:
   - name: lg_code
     title: 全国地方公共団体コード
     description: 検査数字付きの 6 桁
-    semantic: {role: entity, name: city}
+    entity: {type: foreign, name: city}
   - name: city_name
     title: 市区町村名
   - name: assignment_date
@@ -161,4 +154,3 @@ fields:
     title: 国の落札の出典
   - name: procurement_as_of
     title: 国の落札の最終決定日
----

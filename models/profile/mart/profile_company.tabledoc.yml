@@ -12,7 +12,7 @@ columns:
   - name: corporate_number
     title: 法人番号
     description: 13 桁
-    entity: {type: foreign, name: corporate_number}
+    entity: corporate_number
   - name: name
     title: 商号または名称
   - name: company_kind_code
@@ -21,7 +21,7 @@ columns:
     title: 法人種別
   - name: prefecture_code
     title: 都道府県コード
-    entity: {type: foreign, name: prefecture}
+    entity: prefecture
   - name: prefecture_name
     title: 都道府県名
   - name: city_code
@@ -30,7 +30,7 @@ columns:
   - name: lg_code
     title: 全国地方公共団体コード
     description: 検査数字付きの 6 桁
-    entity: {type: foreign, name: city}
+    entity: city
   - name: city_name
     title: 市区町村名
   - name: assignment_date

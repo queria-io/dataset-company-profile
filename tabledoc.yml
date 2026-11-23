@@ -24,36 +24,36 @@ licenses:
 sources:
   - id: houjin-bangou
     title: 国税庁法人番号公表サイト
-    path: https://www.houjin-bangou.nta.go.jp/
+    url: https://www.houjin-bangou.nta.go.jp/
   - id: info
     title: gBizINFO
-    path: https://info.gbiz.go.jp/
+    url: https://info.gbiz.go.jp/
   - id: disclosure2
     title: EDINET
-    path: https://disclosure2.edinet-fsa.go.jp/
+    url: https://disclosure2.edinet-fsa.go.jp/
   - id: p-portal
     title: 調達ポータル
-    path: https://www.p-portal.go.jp/
+    url: https://www.p-portal.go.jp/
   - id: positivedb
     title: 女性の活躍推進企業データベース
-    path: https://positive-ryouritsu.mhlw.go.jp/positivedb/
+    url: https://positive-ryouritsu.mhlw.go.jp/positivedb/
 
 contributors:
   - id: nta
     title: 国税庁
-    path: https://www.nta.go.jp/
+    url: https://www.nta.go.jp/
     roles: [rightsHolder]
   - id: digital
     title: デジタル庁
-    path: https://www.digital.go.jp/
+    url: https://www.digital.go.jp/
     roles: [rightsHolder]
   - id: fsa
     title: 金融庁
-    path: https://www.fsa.go.jp/
+    url: https://www.fsa.go.jp/
     roles: [rightsHolder]
   - id: mhlw
     title: 厚生労働省
-    path: https://www.mhlw.go.jp/
+    url: https://www.mhlw.go.jp/
     roles: [rightsHolder]
 
 spatial_coverage: [JP]

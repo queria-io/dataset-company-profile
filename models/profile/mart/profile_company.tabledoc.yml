@@ -17,8 +17,10 @@ columns:
     title: 商号または名称
   - name: company_kind_code
     title: 法人種別コード
+    dimension: categorical
   - name: company_kind
     title: 法人種別
+    dimension: categorical
   - name: prefecture_code
     title: 都道府県コード
     entity: prefecture
@@ -62,6 +64,7 @@ columns:
     title: 設立日の時点
   - name: industry
     title: 業種
+    dimension: categorical
   - name: industry_source
     title: 業種の出典
   - name: industry_source_url
@@ -72,8 +75,10 @@ columns:
     title: 上場の有無
   - name: listing_status
     title: 上場区分
+    dimension: categorical
   - name: market_segment
     title: 市場区分
+    dimension: categorical
   - name: market_segment_source
     title: 市場区分の出典
   - name: market_segment_as_of

@@ -19,6 +19,7 @@ columns:
   - name: fund_type
     title: 種類
     description: subsidy=補助金、procurement=国の落札
+    dimension: categorical
   - name: title
     title: 件名
   - name: amount
